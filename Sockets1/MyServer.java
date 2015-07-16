@@ -1,4 +1,10 @@
-/*
+/*********************************************
+ *      ______________________________       *
+ *     //                            \\      * 
+ *    //         G.SAIKIRAN           \\     * 
+ *   //________________________________\\    *
+ *                                           *
+ *********************************************
 Sockets are endpoints of two way connection.If you want to connect to someone,you need to be connected with their socket.
 
 */

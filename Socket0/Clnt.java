@@ -1,4 +1,10 @@
-/*
+/*********************************************
+ *      ______________________________       *
+ *     //                            \\      * 
+ *    //         G.SAIKIRAN           \\     * 
+ *   //________________________________\\    *
+ *                                           *
+ *********************************************
 in the following program,the client socket is explicitly binded to port no. 10. after that,
 we connect the client socket to server by connect();
 */
