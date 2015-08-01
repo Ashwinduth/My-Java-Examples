@@ -1,0 +1,1 @@
+this is first example of servlet.we create a basic servlet class MyServlet which extends servlet interface.
