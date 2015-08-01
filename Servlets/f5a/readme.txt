@@ -1,0 +1,2 @@
+this is fifth example of servlet.we can skip using web.xml by using annotations.the use of annotations in place of web.xml is shown in MyServlet
+in this folder.donot  forget to delete web.xml as the container searches first web.xml ,if absent it refers to annotations.
