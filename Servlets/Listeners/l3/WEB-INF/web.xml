@@ -1,0 +1,23 @@
+<web-app>
+ <servlet>
+     <servlet-name>ListenerServlet</servlet-name>
+     <servlet-class>ListenerServlet</servlet-class>
+</servlet> 
+ <servlet-mapping>
+         <servlet-name>ListenerServlet</servlet-name>
+         <url-pattern>/myst</url-pattern>
+  </servlet-mapping>
+<servlet>
+     <servlet-name>ListenerServlet1</servlet-name>
+     <servlet-class>ListenerServlet1</servlet-class>
+</servlet> 
+ <servlet-mapping>
+         <servlet-name>ListenerServlet1</servlet-name>
+         <url-pattern>/myst1</url-pattern>
+  </servlet-mapping>
+
+<listener>
+<listener-class>MyListener</listener-class>
+</listener>
+    
+</web-app>
