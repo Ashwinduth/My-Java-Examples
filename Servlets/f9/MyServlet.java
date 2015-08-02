@@ -18,5 +18,6 @@ RequestDispatcher rd=req.getRequestDispatcher("/myserv");
 rd.forward(req,res);
 //rd.include(req,res);
 out.print("</body></html>"); 
+System.out.println("\n-----after forward()----\n");
 }
 }

@@ -19,9 +19,10 @@ out.print("<p>parameter="+name1+" </p>");
 out.print("</body></html>");  
 }*/
 
-//haandles get method
+//handles get method
 public void doGet(HttpServletRequest req,HttpServletResponse res) throws ServletException,IOException
 {
+
 String name1=req.getParameter("name1");
 res.setContentType("text/html");
 PrintWriter out=res.getWriter();

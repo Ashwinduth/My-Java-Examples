@@ -8,7 +8,7 @@ import java.io.*;
 
 public class MyServ extends HttpServlet
 {
-//overriding service method,but passing req and res to service method of httpServlet
+
 public void service(HttpServletRequest req,HttpServletResponse res) throws ServletException,IOException
 {
 res.setContentType("text/html");

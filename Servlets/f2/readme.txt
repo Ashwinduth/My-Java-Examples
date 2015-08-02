@@ -1,2 +1,2 @@
-this is Second example of servlet.here also ,we implement only servlet interface.we try to do get and post request.In index.html,we specify to
-send request by get or post methods.our servlet gets the request and gets the parameter through request object.
+this is Second example of servlet.here,we extend  Generic servlet class that acts as adapter class.Generic servlet is protocol indipendent.
+we try to do get and post request.In index.html,we specify to send request by get or post methods.our servlet gets the request and gets the parameter through request object.

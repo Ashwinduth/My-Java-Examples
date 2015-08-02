@@ -1,0 +1,20 @@
+<web-app>
+ <servlet>
+     <servlet-name>MyServlet</servlet-name>
+     <servlet-class>MyServlet</servlet-class>
+</servlet> 
+ <servlet-mapping>
+         <servlet-name>MyServlet</servlet-name>
+         <url-pattern>/myst</url-pattern>
+  </servlet-mapping>
+  <servlet>
+     <servlet-name>MyServlet1</servlet-name>
+     <servlet-class>MyServlet1</servlet-class>
+</servlet> 
+ <servlet-mapping>
+         <servlet-name>MyServlet1</servlet-name>
+         <url-pattern>/myst1</url-pattern>
+  </servlet-mapping>
+
+    
+</web-app>
