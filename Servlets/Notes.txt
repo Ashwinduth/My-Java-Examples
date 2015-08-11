@@ -1,0 +1,78 @@
+
+Servlets:
+
+Servlets are java programs that run on web or application server.it runs inside servlet container.Servlets can take the request and acoordingly,give back
+response.servlets generally handle http requests and responses.Servlets can generate dynamic pages.
+
+before servlets,we had CGI-common gateway interface.it could also generate dynamic pages,but was not efficient .when a request comes,container
+creates a new object of cgi for each request,but for servlet,when a request comes for the first time,container loads the servlet and creates 
+it's object,calls init method .then container starts new thread for each request and calls service() of servlet in that thread.so only one 
+object of servlet is called and efficiency is boosted.when we shut down server,container calls destroy method and servlet is destroyed.
+
+so basically,a request comes from client (like browser) to server,the container inside the server recieves it and passes it to servlet's service()
+or other methods like doGet().then we can pocess the rrequest and send the response by response parameter.
+
+the container finds the configuration of servlet by web.xml,also called deployment descriptor .continer loads the servlet class by
+the  the name of servlet we gave in web.xml.we also specify url pattern by which we can call servlet in browser.
+
+no-arg constructor:
+
+container creates object of servlet by Class.newInstance() method which uses the default constructor of servlet,hence we must not create the
+no-arg constructor.
+-----Generic servlets------
+
+Generic servlet is a abstract class that implements Servlet interface.it overrides all methods of Servlet interface except service method
+of Servlet interface,instead it declares service() as abstract method.
+Generic servlet is protocol independent and does not provide protocol independent features where we can't do some tasks like session tracking,
+handling headers like get post etc and use cookies.
+Generic servlet is generally extended by protocol specifc servlets classes like httpservlets.
+
+---------Http servlets-------
+
+Http servlets are http protocol specific.the http methods can be handled properly and specifically if we use http servlets.
+in folder f2,i have handles get and post request without http servlet,but the problem is,request of any kind(get or post) is handled by
+only serrvice method.if we want to have separate implementation of each method,we should use http servlets
+when we extends httpservlets,we should try to avoid overring of service methods as service methods of servlet does the
+job of identifying the method of request like get,post and invokes the required method like doGet for Get request etc. 
+we should rather override doGet,doPost instead of service ,and provide our implementation in those methods.if we donont override
+doGet , doPost etc. methods,then doGet,doPost of httpservlets are called which prints the error messages of get_method not
+supported or post_method not supported.
+
+---------servlet config---------
+
+we can define some parameters in web.xml,which we may often change like driver name of database drivers.we cannot always make such changes
+in servlet java file,as we have to recompile it and deploy again.we put those parameters in web.xml file.these parameters are passed by container
+to servlet as configuration through init(). init() runs only once in its lifetime of servlet,so config are passes only once.
+HttpServlet does only protocol specific tasks,it does not have init method and does not handle config.Generic servlet does it.
+generic servlet has init method that takes ServletConfig as arguments.it also has no-argument init method which is empty and is called
+from inside init(ServletConfug config).when servlet is instantiated,init(ServletConfug config) is called ,which in turns calls no-args 
+init().no-args init is supposed to be overridden in our servlet to do intialization tasks,so is empty. init in generic servlet is defined as:
+
+public void init(ServletConfig config) throws ServletException {
+	this.config = config;
+	this.init();
+    }
+public void init() throws ServletException {
+}
+
+if we overrride init(ServletConfig config),then generic servlet will not have reference to config,so the methods which uses config
+will have null reference and we may get error if we use those methods.so we can do two things: first one is donot override init(ServletConfig config)
+,just override no-args init() and place initialization code in it.you can get reference to config by getServletConfig(). the second one
+is useful when we override init(ServletConfig config), we should pass the config to init(ServletConfig config) of generic servlet by
+super(config).
+
+-------Thread safety of servlets-----
+
+we know that servlet is instaniated only once on first request.on subsequent request the container spawns new thread that  calls service method 
+of the object of servlet.when many threads are created at simultaneous request ,the issue of thread safety arises as multiple thread tries to
+access the service method simultaneously.the local variables inside service method are thread safe as their different copy is made in
+different thread,but the class level variables are not thread safe as they are common and shared by all threads.we have three solutions for it:
+1) do not use class level variables where we need thread safety
+2) use synchronized block
+3) implement single thread model interface
+
+see the article at:
+http://www.javaworld.com/article/2072798/java-web-development/write-thread-safe-servlets.html
+
+
+
