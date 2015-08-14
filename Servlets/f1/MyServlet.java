@@ -10,7 +10,7 @@ public class MyServlet implements Servlet
 {
 public void init(ServletConfig con)
  {
- System.out.println("\n\n-----Init called----"+con);
+ System.out.println("\n\n-----Init called----");
  }
 public void service(ServletRequest req,ServletResponse res) throws ServletException,IOException
 {

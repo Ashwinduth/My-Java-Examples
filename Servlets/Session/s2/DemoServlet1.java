@@ -9,15 +9,12 @@ public class DemoServlet1 extends HttpServlet{
 		res.setContentType("text/html");
 		PrintWriter out=res.getWriter();
 		HttpSession s=req.getSession();
-		if(s!=null){
 		String s1=(String)s.getAttribute("name");
 		String s2=(String)s.getAttribute("pass");
 		out.println("<html><body>");
 		out.println(s1+" = "+s2+"  "+s.isNew());
 		out.println("<BR> ");
 		out.println("<a href='log'>logout</a><BR>");
-		out.println("</body></html>");}
-		else
-		out.println("junk");
+		out.println("</body></html>");
 	}	
 }	

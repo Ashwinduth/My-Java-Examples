@@ -4,7 +4,8 @@ first see the action of forward,then just uncomment rd.include(req,res),and see 
 The RequestDispatcher interface provides the facility of dispatching the request to another resource it may be html, servlet or jsp. This interface can also be used to include the content of another resource also. 
 It is one of the way of servlet collaboration.
 
-
+if we use sendredirect to call other servlet,then it will not have access to previous response object as it is destroyed after sendredirect,
+but by request dispatcher,same response is either forwarded or included,so that called servlet has access to previous request object.
 
 two methods to R.D:
 

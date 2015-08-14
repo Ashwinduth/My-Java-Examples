@@ -1,0 +1,19 @@
+Servlets.
+
+generic servlet
+http servlets
+methods:service ,doget,dopost,init
+servlet cofig,servlet context
+initparameters and attributes
+lifecycle
+annotations
+redirect, request dispatcher- forward and include request
+thread safety
+Single thread model
+events and listeners
+filters
+session tracking and cookies
+
+optional:
+downloading and uploading files
+

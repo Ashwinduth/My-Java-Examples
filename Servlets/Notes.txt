@@ -1,4 +1,3 @@
-
 Servlets:
 
 Servlets are java programs that run on web or application server.it runs inside servlet container.Servlets can take the request and acoordingly,give back
@@ -15,10 +14,7 @@ or other methods like doGet().then we can pocess the rrequest and send the respo
 the container finds the configuration of servlet by web.xml,also called deployment descriptor .continer loads the servlet class by
 the  the name of servlet we gave in web.xml.we also specify url pattern by which we can call servlet in browser.
 
-no-arg constructor:
-
-container creates object of servlet by Class.newInstance() method which uses the default constructor of servlet,hence we must not create the
-no-arg constructor.
+container creates object of servlet by Class.newInstance() method which uses the default constructor of servlet.
 -----Generic servlets------
 
 Generic servlet is a abstract class that implements Servlet interface.it overrides all methods of Servlet interface except service method
@@ -61,6 +57,21 @@ will have null reference and we may get error if we use those methods.so we can 
 is useful when we override init(ServletConfig config), we should pass the config to init(ServletConfig config) of generic servlet by
 super(config).
 
+----attributes:
+we have attriutes classified in terms of scope:
+context attributes: persists from deployment to destroy of servlet
+session attibutes: persists throughout the session
+response attributes: persists only for one request
+
+note: --> the parameters and attributes are different things...please go through them and donot get confused
+
+--------object creation-----
+
+ServletContext object is created at the time of deployment-done only once i.e at time of deployment
+ServletConfig object is created at the time of initialization of servlet before init is called.  - done only once i.e at first request
+request and response object is created when the request is sent by client - done everytime when a new request arrives.
+
+
 -------Thread safety of servlets-----
 
 we know that servlet is instaniated only once on first request.on subsequent request the container spawns new thread that  calls service method 
@@ -73,6 +84,56 @@ different thread,but the class level variables are not thread safe as they are c
 
 see the article at:
 http://www.javaworld.com/article/2072798/java-web-development/write-thread-safe-servlets.html
+
+the context attributes are also shared between sevlets in same war file i.e same context.so they too are not thread safe as they are shared by 
+all threads executing service method. now if synchronize the service method,we can stop two or more threads accessing the context attributes
+through service methods,but we cant stop other service thread of other servlet in same context froms accessing those context attributes at same
+time.so we can use synchronized block and set the lock on context object itself.as only one object of context is made for all servlets
+in same war file,if one thread gets lock on context object neither another thread executing service of same servlet can access the context,nor 
+a thread executing service of other servlet can access the context.this is est way to make them thread-safe,but we would crush the concurrency
+at same time.so its a trade off .
+
+-----------------cookies--------------
+
+HTTP Cookies are little pieces of data that a web application can store on the client machine of users visiting the web application. 
+Typically up to 4 kilo bytes of data.it can be persisted between the multiple client requests.
+
+we can set textual info as value in cookie. we can set age of cookie in seconds in setMaxAge().if we pass 0,the cookie will be deleted.
+cookies also persist even if we close the bowser.
+
+Http Session:
+
+Session Tracking is a way to maintain state (data) of an user. It is also known as session management in servlet.
+
+Http protocol is a stateless so we need to maintain state using session tracking techniques. Each time user requests to the server, server treats the request as the new request. 
+So we need to maintain the state of an user to recognize to particular user. 
+
+this is achieved by the use of cookie.when the request comes for the first time form client,the container checks for the session id in request,
+if not found container sends the session id in response and the session starts eventually.the session id which client recieves
+from the container is stored as cookie in the browser.
+
+the cookie is shared by servlets in same context i.e in same war file.thus a session is also available to all servlets in same context.
+
+the time out for cookie can e set by passing the time interval in seconds as parameter in setMaxAge().
+
+the time out for session can be set either in web.xml as:
+<web-app>
+.
+.
+.
+.
+<session-config>
+        <session-timeout>
+            10
+        </session-timeout>
+    </session-config>
+</web-app>
+
+to set timeout in servlet class,we can use method as: setMaxInactiveInterval(seconds).
+
+-----------------------------------------------------------------------------------------------
+
+
 
 
 
